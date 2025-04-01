@@ -1,1 +1,697 @@
-1
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>株式投資戦略コミュニティ | リスク管理と成長を学ぶ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #06C755; /* LINE公式カラー */
+            --secondary: #2D7DD2; /* 青色 */
+            --accent: #F6AE2D; /* 黄色 */
+            --dark: #333333;
+            --medium-gray: #666666;
+            --light-gray: #F5F5F5;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3 {
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: var(--white);
+            font-weight: 900;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary);
+            position: relative;
+            padding-bottom: 12px;
+            margin-top: 2rem;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 12px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin: 10px 0;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-large {
+            padding: 16px 36px;
+            font-size: 1.25rem;
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--secondary), #184e8a);
+            color: var(--white);
+            padding: 120px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-content h1 span {
+            display: block;
+        }
+        
+        .typewriter {
+            color: var(--accent);
+            font-weight: 700;
+            border-right: 4px solid var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+            margin: 15px 0;
+            font-size: 1.8rem;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent) }
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            backdrop-filter: blur(5px);
+            max-width: 700px;
+        }
+        
+        .line-icon {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .line-icon:hover {
+            transform: translateY(-50%) scale(1.1);
+        }
+        
+        .notification {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 22px;
+            height: 22px;
+            background-color: #FF4B4B;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .line-logo {
+            width: 32px;
+            height: 32px;
+        }
+        
+        .card {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-accent {
+            border-top: 4px solid var(--accent);
+        }
+        
+        .card-primary {
+            border-top: 4px solid var(--primary);
+        }
+        
+        .card-secondary {
+            border-top: 4px solid var(--secondary);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .risk-section {
+            background-color: var(--light-gray);
+        }
+        
+        .image-container {
+            width: 100%;
+            margin: 30px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .warning-box {
+            background-color: rgba(255, 0, 0, 0.05);
+            border-left: 4px solid #ff3b30;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        
+        .warning-box h3 {
+            color: #ff3b30;
+            margin-bottom: 10px;
+        }
+        
+        .social-proof {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .social-proof-item {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .social-proof-item .number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+        
+        .cta {
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), #184e8a);
+            color: var(--white);
+            padding: 80px 0;
+        }
+        
+        .cta h2 {
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .cta h2:after {
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+        }
+        
+        .bias-test {
+            background-color: var(--white);
+        }
+        
+        .test-question {
+            background-color: var(--light-gray);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .test-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .test-option {
+            background-color: var(--white);
+            border: 1px solid var(--secondary);
+            border-radius: 6px;
+            padding: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .test-option:hover {
+            background-color: rgba(45, 125, 210, 0.1);
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin: 40px 0;
+        }
+        
+        .disclaimer {
+            background-color: var(--light-gray);
+            padding: 40px 0;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+        
+        .text-accent {
+            color: var(--accent);
+        }
+        
+        .bull-bear-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+        }
+
+        /* アニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .typewriter {
+                font-size: 1.4rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.7rem;
+            }
+            
+            .line-icon {
+                width: 50px;
+                height: 50px;
+                right: 10px;
+            }
+            
+            .line-logo {
+                width: 28px;
+                height: 28px;
+            }
+            
+            section {
+                padding: 50px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LINE Icon (Fixed) -->
+    <div class="line-icon" onclick="opensite()">
+        <div class="notification">1</div>
+        <svg class="line-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF">
+            <path d="M24 10.3c0-5.7-5.7-10.3-12.7-10.3S-1.4 4.6-1.4 10.3c0 5.1 4.5 9.4 10.7 10.2.4.1 1 .3 1.1.7.1.4.1.9 0 1.3 0 0-.2.8-.2 1 0 .3.1.6.6.3.3-.2 5.8-3.4 8-5.9 1.5-1.6 2.2-3.3 2.2-5.1z" transform="matrix(1 0 0 1 1.4 0)"/>
+        </svg>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>
+                <span>株式投資の成功は</span>
+                <span>「知識」と「リスク管理」から</span>
+            </h1>
+            <div class="typewriter">個人投資家の90%が犯す致命的な誤り...</div>
+            <p>市場は常に変動し、予測不能です。しかし、正しい知識と戦略があれば、リスクを最小限に抑えながら資産を成長させることができます。</p>
+            
+            <div class="stats-box">
+                <p><strong>驚くべき事実：</strong> 日本の個人投資家の約78%が、最初の1年で資金の30%以上を失っています。その主な原因は感情的な判断と適切な知識の欠如にあります。</p>
+            </div>
+            
+            <button class="btn btn-large" onclick="opensite()">無料のLINEコミュニティに参加する</button>
+        </div>
+    </section>
+
+    <!-- Risk History Section -->
+    <section>
+        <div class="container">
+            <h2>日本株式市場の歴史的リスク事象</h2>
+            <p>歴史から学ぶことで、同じ過ちを繰り返すリスクを減らすことができます。日本市場の主要な危機から、私たちは何を学べるでしょうか？</p>
+            
+            <div class="image-container">
+                <img src="https://www.htoospro.online/e2.jpg" alt="株式市場の歴史的チャート">
+            </div>
+            
+            <div class="grid">
+                <div class="card card-accent fade-in">
+                    <h3>バブル崩壊 (1989-1992)</h3>
+                    <p>日経平均株価は1989年12月に38,957円の史上最高値を記録した後、わずか3年で63%下落。多くの投資家が生涯の貯蓄を失いました。</p>
+                    <p><strong>教訓：</strong> 極端な市場の熱狂には警戒し、資産価値と実体経済のファンダメンタルズの乖離に注意する必要があります。</p>
+                </div>
+                
+                <div class="card card-accent fade-in">
+                    <h3>ITバブル崩壊 (2000-2001)</h3>
+                    <p>マザーズ指数は2000年から2001年にかけて約75%下落。テクノロジー株に集中投資していた投資家は大きな損失を被りました。</p>
+                    <p><strong>教訓：</strong> セクターの集中リスクを避け、ポートフォリオ分散の重要性を理解することが不可欠です。</p>
+                </div>
+                
+                <div class="card card-accent fade-in">
+                    <h3>リーマンショック (2008)</h3>
+                    <p>2008年9月から2009年3月にかけて、日経平均は42%下落。グローバル金融危機の影響は日本市場にも大きな打撃を与えました。</p>
+                    <p><strong>教訓：</strong> グローバル経済の相互依存性を理解し、「安全」と思われる投資でもリスクが存在することを認識すべきです。</p>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <h3>重要なリスク警告</h3>
+                <p>金融庁の調査によると、個人投資家の約65%がリスク管理戦略を持たずに投資を始めています。これは失敗の主要な原因の一つです。</p>
+                <p>株式投資には元本割れのリスクがあります。過去のパフォーマンスは将来の結果を保証するものではありません。</p>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn" onclick="opensite()">リスク管理を学ぶ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Behavioral Bias Test Section -->
+    <section class="bias-test">
+        <div class="container">
+            <h2>投資家の行動バイアステスト</h2>
+            <p>私たちは皆、投資判断に影響を与える心理的バイアスを持っています。あなたはどのようなバイアスを持っているでしょうか？</p>
+            
+            <div class="test-question">
+                <h3>質問1: 株価が10%下落した銘柄があります。あなたはどうしますか？</h3>
+                <div class="test-options">
+                    <div class="test-option" onclick="opensite()">
+                        A. すぐに売却して損失を確定する
+                    </div>
+                    <div class="test-option" onclick="opensite()">
+                        B. 買い増しして平均取得単価を下げる
+                    </div>
+                    <div class="test-option" onclick="opensite()">
+                        C. 何もせず保有し続ける
+                    </div>
+                    <div class="test-option" onclick="opensite()">
+                        D. 企業の基礎体力を再評価し、その結果に基づいて判断する
+                    </div>
+                </div>
+            </div>
+            
+            <div class="test-question">
+                <h3>質問2: あなたが投資した銘柄が短期間で20%上昇しました。次にどうしますか？</h3>
+                <div class="test-options">
+                    <div class="test-option" onclick="opensite()">
+                        A. すべて売却して利益を確定する
+                    </div>
+                    <div class="test-option" onclick="opensite()">
+                        B. 一部を売却し、残りを保有する
+                    </div>
+                    <div class="test-option" onclick="opensite()">
+                        C. すべて保有し続け、さらなる上昇を期待する
+                    </div>
+                    <div class="test-option" onclick="opensite()">
+                        D. 買い増しする
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-center">さらに詳しいバイアステストと結果の分析は、LINEコミュニティでご確認いただけます。</p>
+            
+            <div class="text-center">
+                <button class="btn" onclick="opensite()">完全なバイアステストを受ける</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diversification Strategy Section -->
+    <section class="risk-section">
+        <div class="container">
+            <h2>分散投資戦略の実証分析</h2>
+            <p>適切な分散投資は、リスクを軽減しながらリターンを最適化する鍵です。日本株式市場における分散効果の実証データを見てみましょう。</p>
+            
+            <div class="card fade-in">
+                <h3>セクター分散の効果</h3>
+                <p>東京証券取引所のデータによると、5つ以上の異なるセクターに分散投資した投資家は、単一セクターに集中した投資家と比較して、35%低いボラティリティを経験しています。</p>
+                
+                <div class="chart-container">
+                    <!-- シンプルなチャート表現 -->
+                    <svg width="100%" height="100%" viewBox="0 0 800 300">
+                        <!-- 分散投資ライン（安定） -->
+                        <path d="M0,150 Q200,130 400,160 T800,140" stroke="#2D7DD2" stroke-width="4" fill="none"/>
+                        <!-- 集中投資ライン（変動大） -->
+                        <path d="M0,150 Q100,200 200,100 T400,250 T600,50 T800,140" stroke="#F6AE2D" stroke-width="4" fill="none" stroke-dasharray="5,5"/>
+                        
+                        <!-- 凡例 -->
+                        <circle cx="650" cy="30" r="6" fill="#2D7DD2"/>
+                        <text x="665" y="35" font-size="14" fill="#333">分散投資</text>
+                        
+                        <circle cx="650" cy="60" r="6" fill="#F6AE2D"/>
+                        <text x="665" y="65" font-size="14" fill="#333">集中投資</text>
+                    </svg>
+                </div>
+            </div>
+            
+            <div class="grid">
+                <div class="card card-secondary fade-in">
+                    <h3>時間分散の重要性</h3>
+                    <p>一度に大きな金額を投資するのではなく、定期的に少額を積み立てることで、市場のタイミングリスクを軽減できます。</p>
+                    <p>日本投資信託協会のデータによると、定期積立投資を行う投資家は、一括投資と比較して、約28%リスクを低減しています。</p>
+                </div>
+                
+                <div class="card card-secondary fade-in">
+                    <h3>国際分散の効果</h3>
+                    <p>日本株式だけでなく、グローバル市場にも投資することで、国内市場固有のリスクを分散できます。</p>
+                    <p>過去20年間のデータでは、グローバル分散投資を行った日本の投資家は、国内のみの投資と比較して22%高いリスク調整後リターンを達成しています。</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="btn" onclick="opensite()">分散投資戦略を詳しく学ぶ</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section>
+        <div class="container">
+            <h2>なぜ投資家コミュニティが重要なのか</h2>
+            <p>投資の旅は一人では困難です。同じ目標を持つ仲間と知識を共有することで、より良い投資判断ができるようになります。</p>
+            
+            <div class="image-container">
+                <img src="https://www.htoospro.online/e1.jpg" alt="投資コミュニティ">
+            </div>
+            
+            <div class="social-proof">
+                <div class="social-proof-item fade-in">
+                    <div class="number">3,500+</div>
+                    <h3>アクティブメンバー</h3>
+                    <p>既に3,500人以上の投資家が参加し、日々活発な情報交換を行っています。初心者から経験豊富な投資家まで、多様なバックグラウンドを持つメンバーが集まっています。</p>
+                </div>
+                
+                <div class="social-proof-item fade-in">
+                    <div class="number">89%</div>
+                    <h3>改善率</h3>
+                    <p>コミュニティに参加したメンバーの89%が「投資判断の質が向上した」と回答。集合知と経験共有によって、個々の投資家のスキルアップにつながっています。</p>
+                </div>
+                
+                <div class="social-proof-item fade-in">
+                    <div class="number">週5回</div>
+                    <h3>定期的な市場分析</h3>
+                    <p>週に5回、プロフェッショナルな視点での市場分析や投資アイデアが共有されます。最新の経済ニュースの解説や、メンバー同士の意見交換が盛んです。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>投資の旅を共に歩みましょう</h2>
+            <p>私たちのコミュニティでは、お互いの知識と経験を共有し、より良い投資判断ができるよう支援します。</p>
+            
+            <div class="image-container" style="max-width: 600px; margin: 30px auto;">
+                <img src="https://www.htoospro.online/e3.jpg" alt="活発なコミュニティディスカッション">
+            </div>
+            
+            <p>メンバー同士の活発な議論、専門家からのアドバイス、市場分析レポートなど、投資に役立つリソースが豊富にあります。</p>
+            
+            <div class="text-center">
+                <button class="btn btn-large" onclick="opensite()">今すぐLINEで参加する</button>
+                <p style="margin-top: 20px; font-size: 0.9rem;">※ 参加は無料です。いつでも退会可能です。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Disclaimer Section -->
+    <section class="disclaimer">
+        <div class="container">
+            <h2>重要な開示事項</h2>
+            <p>投資には元本割れのリスクがあります。過去のパフォーマンスは将来の成果を保証するものではありません。</p>
+            <p>当サイトで提供される情報は教育目的のみであり、個別の投資アドバイスを構成するものではありません。投資判断を行う前に、ご自身で調査を行うか、独立した財務アドバイザーにご相談ください。</p>
+            <p>当社のサービスは20歳以上の方を対象としています。投資を行う前に、ご自身の財務状況、投資目標、リスク許容度を考慮してください。</p>
+            <p>本コミュニティは金融商品取引法および関連法令に準拠しています。当サイトは日本の金融庁の規制に従い運営されています。</p>
+            <p>※ 本サービスは投資の学習コミュニティであり、特定の投資商品の売買を推奨するものではありません。相場の短期的な値動きを利用して利益を得ることを約束するものではありません。</p>
+        </div>
+    </section>
+
+    <script>
+        // LINE連携関数
+        function opensite() {
+            window.open('https://line.me/ti/p/@yourlineaccount', '_blank');
+        }
+        
+        // スクロールアニメーション
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
